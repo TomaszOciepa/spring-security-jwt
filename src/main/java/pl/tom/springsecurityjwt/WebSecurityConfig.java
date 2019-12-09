@@ -12,24 +12,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    PasswordEncoder getPasswordEncokder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser(User.builder()
-                .username("test")
-                .password(getPasswordEncokder().encode("test"))
-                .roles("ADMIN"));
-    }
+//    @Bean
+//    PasswordEncoder getPasswordEncokder(){
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser(User.builder()
+//                .username("test")
+//                .password(getPasswordEncokder().encode("test"))
+//                .roles("ADMIN"));
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/test2").authenticated()
-                .antMatchers("/test3").hasRole("ADMIN")
+        http.authorizeRequests()
+                .antMatchers("/hello1").permitAll()
+                .antMatchers("/hello2").hasRole("USER")
+                .antMatchers("/hello3").hasRole("ADMIN")
                 .and()
-                .formLogin().permitAll();
+                .addFilter(new JwtFilter(authenticationManager()));
     }
 }

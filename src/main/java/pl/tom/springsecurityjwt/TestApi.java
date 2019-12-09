@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestApi {
 
-    @GetMapping("/test1")
-    public String test1(){
-        return "test1";
+    @GetMapping("/hello1")
+    public String hello1(){
+        return "hello1";
     }
 
-    @GetMapping("/test2")
-    public String test2(){
-        return "test2";
+    @GetMapping("/hello2")
+    public String hello2(){
+        return "hello2";
     }
 
-    @GetMapping("/test3")
-    public String test3(){
-        return "test3";
+    @GetMapping("/hello3")
+    public String hello3(){
+        return "hello3";
     }
 }
